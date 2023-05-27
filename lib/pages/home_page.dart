@@ -42,7 +42,9 @@ class _HomePageState extends State<HomePage> {
       future: Hive.openBox('tasks'),
       builder: (BuildContext _context, AsyncSnapshot _snapshot) {
         if (_snapshot.hasData) {
+          //here  i get the data from the hive database and pass it to a box type variable
           box = _snapshot.data;
+          //Then I excecute the _taskList widget
           return _tasksList();
         } else {
           return const Center(child: CircularProgressIndicator());
@@ -52,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _tasksList() {
+    //The first thing to do here is to get a list of tasks obgects from box
     List tasks = box!.values.toList();
     return ListView.builder(
         itemCount: tasks.length,
